@@ -20,7 +20,7 @@ import java.util.List;
 
 public class ListaPacientesActivity extends AppCompatActivity
         implements PacienteAdapter.OnPacienteSelectedListener {
-
+//hola
     private RecyclerView rvPacientes;
     private TextView tvSinPacientes;
     private Button btnVolver;
