@@ -4,60 +4,91 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@android:color/white">
+    android:background="#F4F7FB">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center_horizontal">
+        android:paddingHorizontal="24dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="24dp"
+        android:clipToPadding="false">
+
+        <!-- Etiqueta superior -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ubicación y Rastreo"
+            android:textSize="14sp"
+            android:textAllCaps="true"
+            android:letterSpacing="0.1"
+            android:textColor="#0277BD"
+            android:textStyle="bold" />
 
         <!-- Encabezado -->
         <TextView
             android:id="@+id/tvTituloUbicacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Geolocalización GPS - Hospital"
-            android:textSize="28sp"
+            android:text="Geolocalización GPS"
+            android:textSize="32sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="16dp"
+            android:textColor="#102A43"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="32dp" />
 
-        <!-- Tarjeta de información -->
+        <!-- Tarjeta de información blanca -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="2dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="#FFFFFF"
             android:layout_marginBottom="24dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="24dp">
 
-                <!-- Latitud -->
+                <!-- Latitud (Resaltado) -->
                 <TextView
                     android:id="@+id/tvLatitud"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Latitud: --"
                     android:textSize="16sp"
-                    android:paddingBottom="12dp"
-                    android:textColor="@android:color/black" />
+                    android:textStyle="bold"
+                    android:textColor="#102A43" />
 
-                <!-- Longitud -->
+                <!-- Divisor -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E2E8F0"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- Longitud (Resaltado) -->
                 <TextView
                     android:id="@+id/tvLongitud"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Longitud: --"
                     android:textSize="16sp"
-                    android:paddingBottom="12dp"
-                    android:textColor="@android:color/black" />
+                    android:textStyle="bold"
+                    android:textColor="#102A43" />
+
+                <!-- Divisor -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E2E8F0"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"/>
 
                 <!-- Altitud -->
                 <TextView
@@ -65,9 +96,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Altitud: --"
-                    android:textSize="16sp"
-                    android:paddingBottom="12dp"
-                    android:textColor="@android:color/black" />
+                    android:textSize="15sp"
+                    android:textColor="#334E68" />
+
+                <!-- Divisor -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E2E8F0"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"/>
 
                 <!-- Precisión -->
                 <TextView
@@ -75,9 +113,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Precisión: --"
-                    android:textSize="16sp"
-                    android:paddingBottom="12dp"
-                    android:textColor="@android:color/black" />
+                    android:textSize="15sp"
+                    android:textColor="#334E68" />
+
+                <!-- Divisor -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E2E8F0"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginBottom="12dp"/>
 
                 <!-- Velocidad -->
                 <TextView
@@ -85,34 +130,49 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="Velocidad: --"
-                    android:textSize="16sp"
-                    android:textColor="@android:color/black" />
+                    android:textSize="15sp"
+                    android:textColor="#334E68" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Botón Actualizar Coordenadas -->
+        <!-- Espaciador flexible para empujar los botones abajo -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Botón Actualizar Coordenadas (Principal) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnObtenerUbicacion"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="64dp"
             android:text="Actualizar Coordenadas"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
             android:textAllCaps="false"
-            android:padding="14dp"
-            app:cornerRadius="8dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="16dp"
+            app:backgroundTint="#0277BD"
+            app:elevation="4dp"
             android:layout_marginBottom="16dp" />
 
-        <!-- Botón Volver al Menú -->
+        <!-- Botón Volver al Menú (Secundario) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnVolver"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Volver al Menú"
-            android:textAllCaps="false"
-            android:padding="14dp"
-            app:cornerRadius="8dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_marginBottom="16dp" />
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Volver al Menú"
+            android:textColor="#486581"
+            android:textSize="15sp"
+            android:textAllCaps="false"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="12dp"
+            app:strokeColor="#BCCCDC"
+            app:strokeWidth="1dp" />
 
     </LinearLayout>
 </ScrollView>

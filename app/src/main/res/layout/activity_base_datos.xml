@@ -4,77 +4,123 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@android:color/white">
+    android:paddingHorizontal="24dp"
+    android:paddingTop="40dp"
+    android:paddingBottom="24dp"
+    android:background="#F4F7FB">
+
+    <!-- Etiqueta superior -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Administración"
+        android:textSize="14sp"
+        android:textAllCaps="true"
+        android:letterSpacing="0.1"
+        android:textColor="#0277BD"
+        android:textStyle="bold" />
 
     <!-- Encabezado -->
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Inspección de Base de Datos SQLite"
-        android:textSize="24sp"
+        android:text="Visor de SQLite"
+        android:textSize="32sp"
         android:textStyle="bold"
-        android:textColor="@android:color/black"
+        android:textColor="#102A43"
+        android:layout_marginTop="4dp"
         android:layout_marginBottom="24dp" />
 
-    <!-- Selector de Tabla -->
+    <!-- Controles de selección de tabla -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="16dp">
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical">
 
-        <Spinner
-            android:id="@+id/spTablas"
+        <!-- El Spinner envuelto en una tarjeta para un diseño limpio -->
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="64dp"
             android:layout_weight="1"
-            android:padding="8dp"
-            android:background="@android:drawable/spinner_background" />
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:strokeWidth="1dp"
+            app:strokeColor="#BCCCDC"
+            app:cardBackgroundColor="#FFFFFF"
+            android:layout_marginEnd="12dp">
 
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/spTablas"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="12dp"
+                android:background="@android:color/transparent" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Botón de consulta alineado al tamaño del Spinner -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCargarTabla"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Consultar Tabla"
+            android:layout_height="64dp"
+            android:text="Consultar"
             android:textAllCaps="false"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            app:cornerRadius="8dp"
-            android:layout_marginStart="8dp" />
+            android:textColor="@android:color/white"
+            android:textSize="15sp"
+            app:cornerRadius="12dp"
+            app:backgroundTint="#0277BD"
+            app:elevation="2dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp" />
     </LinearLayout>
 
-    <!-- Contenedor de Visores (ScrollView con TextView) -->
-    <ScrollView
+    <!-- Contenedor de Visores (Estilo "Consola" en tarjeta) -->
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:background="#F5F5F5"
-        android:padding="12dp"
-        android:layout_marginBottom="16dp"
-        android:scrollbars="vertical">
+        app:cardCornerRadius="16dp"
+        app:cardElevation="2dp"
+        app:strokeWidth="0dp"
+        app:cardBackgroundColor="#FFFFFF"
+        android:layout_marginBottom="24dp">
 
-        <TextView
-            android:id="@+id/tvDatosRaw"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Seleccione una tabla para visualizar..."
-            android:textSize="14sp"
-            android:fontFamily="monospace"
-            android:textColor="@android:color/black"
-            android:lineSpacingExtra="4dp" />
+            android:layout_height="match_parent"
+            android:padding="16dp"
+            android:scrollbars="vertical"
+            android:clipToPadding="false">
 
-    </ScrollView>
+            <!-- Los datos de la DB se verán aquí -->
+            <TextView
+                android:id="@+id/tvDatosRaw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Seleccione una tabla para visualizar..."
+                android:textSize="14sp"
+                android:fontFamily="monospace"
+                android:textColor="#334E68"
+                android:lineSpacingExtra="6dp" />
+
+        </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- Botón Volver al Menú -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnVolver"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:text="Volver al Menú"
+        android:textColor="#486581"
+        android:textSize="15sp"
         android:textAllCaps="false"
-        android:padding="12dp"
-        app:cornerRadius="8dp"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton" />
+        android:insetTop="0dp"
+        android:insetBottom="0dp"
+        app:cornerRadius="12dp"
+        app:strokeColor="#BCCCDC"
+        app:strokeWidth="1dp" />
 
 </LinearLayout>

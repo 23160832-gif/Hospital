@@ -4,94 +4,165 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@android:color/white">
+    android:background="#F4F7FB"> <!-- Fondo suave azul/grisáceo tipo app médica -->
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:gravity="center_horizontal">
+        android:paddingHorizontal="24dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="24dp"
+        android:clipToPadding="false"> <!-- Permite que las sombras se vean correctamente -->
 
-        <!-- Encabezado -->
+        <!-- Etiqueta superior sutil -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gestión Médica"
+            android:textSize="14sp"
+            android:textAllCaps="true"
+            android:letterSpacing="0.1"
+            android:textColor="#0277BD"
+            android:textStyle="bold" />
+
+        <!-- Encabezado Principal -->
         <TextView
             android:id="@+id/tvTituloMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Menú Principal - Hospital"
-            android:textSize="28sp"
+            android:text="Menú Principal"
+            android:textSize="32sp"
             android:textStyle="bold"
-            android:textColor="@android:color/black"
-            android:layout_marginTop="32dp"
-            android:layout_marginBottom="48dp" />
+            android:textColor="#102A43"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="40dp" />
 
-        <!-- Botón: Monitoreo WiFi -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnWifi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Monitoreo WiFi"
-            android:textAllCaps="false"
-            android:padding="14dp"
-            app:cornerRadius="8dp"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Botón: Ubicación GPS -->
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btnUbicacion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Ubicación GPS"
-            android:textAllCaps="false"
-            android:padding="14dp"
-            app:cornerRadius="8dp"
-            android:layout_marginBottom="16dp" />
-
-        <!-- Botón: Registrar Paciente / Consulta -->
+        <!-- BOTÓN PRINCIPAL (Call to Action destacado) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRegistrarPaciente"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="76dp"
             android:text="Registrar Paciente / Consulta"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
             android:textAllCaps="false"
-            android:padding="14dp"
-            app:cornerRadius="8dp"
+            android:gravity="center_vertical|start"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="16dp"
+            app:backgroundTint="#0277BD"
+            app:elevation="4dp"
+            android:layout_marginBottom="24dp" />
+
+        <!-- Subtítulo de sección -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Herramientas del sistema"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#486581"
             android:layout_marginBottom="16dp" />
 
-        <!-- Botón: Lista de Pacientes -->
+        <!-- BOTONES SECUNDARIOS (Estilo "Tarjetas Blancas" flotantes) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnListaPacientes"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="64dp"
             android:text="Lista de Pacientes"
+            android:textColor="#334E68"
+            android:textSize="15sp"
             android:textAllCaps="false"
-            android:padding="14dp"
-            app:cornerRadius="8dp"
-            android:layout_marginBottom="16dp" />
+            android:gravity="center_vertical|start"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="12dp"
+            app:backgroundTint="#FFFFFF"
+            app:elevation="2dp"
+            android:layout_marginBottom="12dp" />
 
-        <!-- Botón: Visualizar Base de Datos -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnWifi"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="Monitoreo WiFi"
+            android:textColor="#334E68"
+            android:textSize="15sp"
+            android:textAllCaps="false"
+            android:gravity="center_vertical|start"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="12dp"
+            app:backgroundTint="#FFFFFF"
+            app:elevation="2dp"
+            android:layout_marginBottom="12dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnUbicacion"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:text="Ubicación GPS"
+            android:textColor="#334E68"
+            android:textSize="15sp"
+            android:textAllCaps="false"
+            android:gravity="center_vertical|start"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="12dp"
+            app:backgroundTint="#FFFFFF"
+            app:elevation="2dp"
+            android:layout_marginBottom="12dp" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnVerBaseDatos"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="64dp"
             android:text="Visualizar Base de Datos"
+            android:textColor="#334E68"
+            android:textSize="15sp"
             android:textAllCaps="false"
-            android:padding="14dp"
-            app:cornerRadius="8dp"
-            android:layout_marginBottom="16dp" />
+            android:gravity="center_vertical|start"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="12dp"
+            app:backgroundTint="#FFFFFF"
+            app:elevation="2dp"
+            android:layout_marginBottom="32dp" />
 
-        <!-- Botón: Cerrar Sesión (estilo secundario o de alerta) -->
+        <!-- Espaciador que empuja el botón de cerrar sesión hacia el fondo si la pantalla es alta -->
+        <Space
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- BOTÓN: Cerrar Sesión (Estilo sutil de alerta) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCerrarSesion"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Cerrar Sesión"
-            android:textAllCaps="false"
-            android:padding="14dp"
-            app:cornerRadius="8dp"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="32dp" />
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Cerrar Sesión"
+            android:textColor="#D32F2F"
+            android:textSize="15sp"
+            android:textAllCaps="false"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            app:cornerRadius="12dp"
+            app:strokeColor="#FFCDD2"
+            app:strokeWidth="1dp"
+            app:backgroundTint="#FFF0F0"
+            android:layout_marginTop="16dp" />
 
     </LinearLayout>
 </ScrollView>
