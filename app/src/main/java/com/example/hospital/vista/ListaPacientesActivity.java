@@ -1,6 +1,8 @@
 package com.example.hospital.vista;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import com.example.hospital.adapter.PacienteAdapter;
 import com.example.hospital.controlador.ConsultaController;
 import com.example.hospital.controlador.PacienteController;
 import com.example.hospital.modelo.Paciente;
+import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.List;
 
@@ -23,6 +26,7 @@ public class ListaPacientesActivity extends AppCompatActivity
 
     private RecyclerView rvPacientes;
     private TextView tvSinPacientes;
+    private TextInputEditText etBuscar;
     private Button btnVolver;
     private Button btnEliminarPaciente;
 
@@ -40,6 +44,7 @@ public class ListaPacientesActivity extends AppCompatActivity
         // Vincular componentes
         rvPacientes = findViewById(R.id.rvPacientes);
         tvSinPacientes = findViewById(R.id.tvSinPacientes);
+        etBuscar = findViewById(R.id.etBuscar);
         btnVolver = findViewById(R.id.btnVolver);
         btnEliminarPaciente = findViewById(R.id.btnEliminarPaciente);
 
@@ -66,6 +71,37 @@ public class ListaPacientesActivity extends AppCompatActivity
             }
         });
 
+        // Configurar buscador con TextWatcher
+        etBuscar.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                // No se usa
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                // No se usa
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                // Filtrar la lista cuando el texto cambia
+                if (adapter != null) {
+                    adapter.filtrar(s.toString());
+
+                    // Mostrar/ocultar vista vacía según resultados del filtro
+                    if (adapter.getItemCount() == 0) {
+                        tvSinPacientes.setVisibility(View.VISIBLE);
+                        tvSinPacientes.setText("No se encontraron pacientes");
+                        rvPacientes.setVisibility(View.GONE);
+                    } else {
+                        tvSinPacientes.setVisibility(View.GONE);
+                        rvPacientes.setVisibility(View.VISIBLE);
+                    }
+                }
+            }
+        });
+
         // Cargar lista inicial
         cargarListaPacientes();
     }
@@ -74,6 +110,8 @@ public class ListaPacientesActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         cargarListaPacientes();
+        // Limpiar búsqueda al regresar
+        etBuscar.setText("");
     }
 
     private void cargarListaPacientes() {
@@ -81,6 +119,7 @@ public class ListaPacientesActivity extends AppCompatActivity
 
         if (lista == null || lista.isEmpty()) {
             tvSinPacientes.setVisibility(View.VISIBLE);
+            tvSinPacientes.setText("No hay pacientes registrados");
             rvPacientes.setVisibility(View.GONE);
             btnEliminarPaciente.setVisibility(View.GONE);
         } else {
@@ -97,7 +136,6 @@ public class ListaPacientesActivity extends AppCompatActivity
         }
     }
 
-    // Implementación de la interfaz OnPacienteSelectedListener
     @Override
     public void onPacienteSelected(int idPaciente) {
         this.idPacienteSeleccionado = idPaciente;
@@ -113,7 +151,6 @@ public class ListaPacientesActivity extends AppCompatActivity
             return;
         }
 
-        // Confirmar eliminación
         new androidx.appcompat.app.AlertDialog.Builder(this)
                 .setTitle("Eliminar Paciente")
                 .setMessage("¿Estás seguro de que deseas eliminar este paciente?")
@@ -125,6 +162,7 @@ public class ListaPacientesActivity extends AppCompatActivity
                                 Toast.LENGTH_SHORT).show();
                         idPacienteSeleccionado = -1;
                         cargarListaPacientes();
+                        etBuscar.setText(""); // Limpiar búsqueda
                     } else {
                         Toast.makeText(ListaPacientesActivity.this,
                                 "Error al eliminar paciente",

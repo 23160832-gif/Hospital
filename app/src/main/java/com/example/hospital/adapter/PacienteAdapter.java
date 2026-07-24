@@ -15,17 +15,18 @@ import com.example.hospital.controlador.ConsultaController;
 import com.example.hospital.modelo.Consulta;
 import com.example.hospital.modelo.Paciente;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.PacienteViewHolder> {
 
     private Context context;
-    private List<Paciente> listaPacientes;
+    private List<Paciente> listaPacientes; // Lista original completa
+    private List<Paciente> listaFiltrada;  // Lista filtrada para mostrar
     private ConsultaController consultaController;
     private OnPacienteSelectedListener listener;
-    private int selectedPosition = -1; // Para marcar visualmente el seleccionado
+    private int selectedPosition = -1;
 
-    // Interface para comunicar selección a la Activity
     public interface OnPacienteSelectedListener {
         void onPacienteSelected(int idPaciente);
     }
@@ -35,6 +36,7 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
                            OnPacienteSelectedListener listener) {
         this.context = context;
         this.listaPacientes = listaPacientes;
+        this.listaFiltrada = new ArrayList<>(listaPacientes); // Copia para filtrar
         this.consultaController = consultaController;
         this.listener = listener;
     }
@@ -48,7 +50,7 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
 
     @Override
     public void onBindViewHolder(@NonNull PacienteViewHolder holder, int position) {
-        Paciente paciente = listaPacientes.get(position);
+        Paciente paciente = listaFiltrada.get(position);
 
         // Datos básicos del paciente
         holder.tvIdPaciente.setText("ID: #" + paciente.getIdPaciente());
@@ -77,16 +79,11 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                // Actualizar posición seleccionada
                 selectedPosition = holder.getAdapterPosition();
-                notifyDataSetChanged(); // Refrescar la lista para mostrar selección
-
-                // Notificar a la Activity
+                notifyDataSetChanged();
                 if (listener != null) {
                     listener.onPacienteSelected(paciente.getIdPaciente());
                 }
-
-                // Mostrar un Toast para confirmar selección
                 Toast.makeText(context, "Paciente seleccionado: " +
                                 paciente.getNombre() + " " + paciente.getApellido(),
                         Toast.LENGTH_SHORT).show();
@@ -98,11 +95,10 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Deseleccionar
                 selectedPosition = -1;
                 notifyDataSetChanged();
                 if (listener != null) {
-                    listener.onPacienteSelected(-1); // -1 indica deselección
+                    listener.onPacienteSelected(-1);
                 }
             }
         });
@@ -110,7 +106,7 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
 
     @Override
     public int getItemCount() {
-        return listaPacientes != null ? listaPacientes.size() : 0;
+        return listaFiltrada != null ? listaFiltrada.size() : 0;
     }
 
     private Consulta obtenerConsultaPorPaciente(int idPaciente) {
@@ -125,10 +121,42 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
         return null;
     }
 
+    /**
+     * Actualiza la lista completa y el filtro
+     */
     public void setPacientes(List<Paciente> nuevosPacientes) {
         this.listaPacientes = nuevosPacientes;
-        selectedPosition = -1; // Resetear selección
+        this.listaFiltrada = new ArrayList<>(nuevosPacientes);
+        selectedPosition = -1;
         notifyDataSetChanged();
+    }
+
+    /**
+     * Filtra la lista de pacientes por texto (nombre o apellido)
+     */
+    public void filtrar(String texto) {
+        if (texto == null || texto.trim().isEmpty()) {
+            // Mostrar todos
+            listaFiltrada = new ArrayList<>(listaPacientes);
+        } else {
+            String busqueda = texto.trim().toLowerCase();
+            List<Paciente> filtrados = new ArrayList<>();
+            for (Paciente paciente : listaPacientes) {
+                String nombreCompleto = (paciente.getNombre() + " " + paciente.getApellido()).toLowerCase();
+                // Buscar en nombre completo (nombre + apellido)
+                if (nombreCompleto.contains(busqueda)) {
+                    filtrados.add(paciente);
+                }
+            }
+            listaFiltrada = filtrados;
+        }
+        selectedPosition = -1; // Limpiar selección al filtrar
+        notifyDataSetChanged();
+
+        // Notificar al listener que se deseleccionó
+        if (listener != null) {
+            listener.onPacienteSelected(-1);
+        }
     }
 
     // ViewHolder interno
