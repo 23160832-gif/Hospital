@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,15 +18,19 @@ import com.example.hospital.modelo.Paciente;
 
 import java.util.List;
 
-public class ListaPacientesActivity extends AppCompatActivity {
+public class ListaPacientesActivity extends AppCompatActivity
+        implements PacienteAdapter.OnPacienteSelectedListener {
 
     private RecyclerView rvPacientes;
     private TextView tvSinPacientes;
     private Button btnVolver;
+    private Button btnEliminarPaciente;
 
     private PacienteController pacienteController;
     private ConsultaController consultaController;
     private PacienteAdapter adapter;
+
+    private int idPacienteSeleccionado = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +41,7 @@ public class ListaPacientesActivity extends AppCompatActivity {
         rvPacientes = findViewById(R.id.rvPacientes);
         tvSinPacientes = findViewById(R.id.tvSinPacientes);
         btnVolver = findViewById(R.id.btnVolver);
+        btnEliminarPaciente = findViewById(R.id.btnEliminarPaciente);
 
         // Inicializar controladores
         pacienteController = new PacienteController(this);
@@ -52,6 +58,14 @@ public class ListaPacientesActivity extends AppCompatActivity {
             }
         });
 
+        // Configurar listener para eliminar
+        btnEliminarPaciente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                eliminarPacienteSeleccionado();
+            }
+        });
+
         // Cargar lista inicial
         cargarListaPacientes();
     }
@@ -59,7 +73,6 @@ public class ListaPacientesActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        // Actualizar lista al regresar a esta actividad
         cargarListaPacientes();
     }
 
@@ -67,21 +80,58 @@ public class ListaPacientesActivity extends AppCompatActivity {
         List<Paciente> lista = pacienteController.obtenerTodosLosPacientes();
 
         if (lista == null || lista.isEmpty()) {
-            // Mostrar vista vacía
             tvSinPacientes.setVisibility(View.VISIBLE);
             rvPacientes.setVisibility(View.GONE);
+            btnEliminarPaciente.setVisibility(View.GONE);
         } else {
-            // Mostrar RecyclerView con datos
             tvSinPacientes.setVisibility(View.GONE);
             rvPacientes.setVisibility(View.VISIBLE);
+            btnEliminarPaciente.setVisibility(View.VISIBLE);
 
             if (adapter == null) {
-                adapter = new PacienteAdapter(this, lista, consultaController);
+                adapter = new PacienteAdapter(this, lista, consultaController, this);
                 rvPacientes.setAdapter(adapter);
             } else {
-                // Actualizar datos del adapter sin recrearlo
                 adapter.setPacientes(lista);
             }
         }
+    }
+
+    // Implementación de la interfaz OnPacienteSelectedListener
+    @Override
+    public void onPacienteSelected(int idPaciente) {
+        this.idPacienteSeleccionado = idPaciente;
+        if (idPaciente == -1) {
+            Toast.makeText(this, "Paciente deseleccionado", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void eliminarPacienteSeleccionado() {
+        if (idPacienteSeleccionado == -1) {
+            Toast.makeText(this, "Mantén presionado un paciente para seleccionarlo",
+                    Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Confirmar eliminación
+        new androidx.appcompat.app.AlertDialog.Builder(this)
+                .setTitle("Eliminar Paciente")
+                .setMessage("¿Estás seguro de que deseas eliminar este paciente?")
+                .setPositiveButton("Eliminar", (dialog, which) -> {
+                    int filas = pacienteController.eliminarPaciente(idPacienteSeleccionado);
+                    if (filas > 0) {
+                        Toast.makeText(ListaPacientesActivity.this,
+                                "Paciente eliminado correctamente",
+                                Toast.LENGTH_SHORT).show();
+                        idPacienteSeleccionado = -1;
+                        cargarListaPacientes();
+                    } else {
+                        Toast.makeText(ListaPacientesActivity.this,
+                                "Error al eliminar paciente",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .setNegativeButton("Cancelar", null)
+                .show();
     }
 }
