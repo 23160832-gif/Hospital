@@ -1,19 +1,27 @@
 package com.example.hospital.vista;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import com.example.hospital.R;
 
 public class WifiActivity extends AppCompatActivity {
+
+    private static final int PERMISSION_REQUEST_CODE = 200;
 
     private TextView tvSsid;
     private TextView tvBssid;
@@ -41,14 +49,14 @@ public class WifiActivity extends AppCompatActivity {
         btnActualizar = findViewById(R.id.btnActualizar);
         btnVolver = findViewById(R.id.btnVolver);
 
-        // Cargar información inicial
-        obtenerInformacionWifi();
+        // Verificar permisos y cargar información
+        verificarPermisosWifi();
 
         // Listener para actualizar
         btnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                obtenerInformacionWifi();
+                verificarPermisosWifi();
                 Toast.makeText(WifiActivity.this, "Información actualizada", Toast.LENGTH_SHORT).show();
             }
         });
@@ -60,6 +68,37 @@ public class WifiActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void verificarPermisosWifi() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        PERMISSION_REQUEST_CODE);
+            } else {
+                obtenerInformacionWifi();
+            }
+        } else {
+            obtenerInformacionWifi();
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                obtenerInformacionWifi();
+                Toast.makeText(this, "Permiso concedido", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Permiso de ubicación necesario para obtener SSID", Toast.LENGTH_SHORT).show();
+                tvSsid.setText("SSID: Permiso denegado");
+                tvEstado.setText("Estado: Permiso requerido");
+            }
+        }
     }
 
     private void obtenerInformacionWifi() {
@@ -82,7 +121,7 @@ public class WifiActivity extends AppCompatActivity {
         }
 
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        if (wifiInfo == null) {
+        if (wifiInfo == null || wifiInfo.getSSID() == null) {
             tvEstado.setText("Estado: No conectado");
             tvSsid.setText("SSID: --");
             tvBssid.setText("BSSID: --");
@@ -93,16 +132,31 @@ public class WifiActivity extends AppCompatActivity {
             return;
         }
 
-        // SSID
+        // SSID - Manejar correctamente
         String ssid = wifiInfo.getSSID();
-        if (ssid != null && !ssid.isEmpty()) {
+        if (ssid != null && !ssid.isEmpty() && !ssid.equals("<unknown ssid>")) {
             // Remove quotes if present (Android sometimes adds "")
             if (ssid.startsWith("\"") && ssid.endsWith("\"")) {
                 ssid = ssid.substring(1, ssid.length() - 1);
             }
             tvSsid.setText("SSID: " + ssid);
         } else {
-            tvSsid.setText("SSID: --");
+            // Para Android 10+, verificar si tenemos permisos
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
+                    tvSsid.setText("SSID: " + (ssid != null ? ssid : "Desconocido"));
+                } else {
+                    tvSsid.setText("SSID: Permiso de ubicación requerido");
+                }
+            } else {
+                // En versiones anteriores, si es <unknown ssid>, mostrar mensaje
+                if (ssid != null && ssid.equals("<unknown ssid>")) {
+                    tvSsid.setText("SSID: No disponible (intenta activar ubicación)");
+                } else {
+                    tvSsid.setText("SSID: " + (ssid != null ? ssid : "No disponible"));
+                }
+            }
         }
 
         // BSSID
@@ -150,9 +204,6 @@ public class WifiActivity extends AppCompatActivity {
         tvEstado.setText("Estado: Conectado");
     }
 
-    /**
-     * Convierte una dirección IP entera (representación de red) a su formato IPv4 estándar.
-     */
     private String intToIp(int ip) {
         return ((ip >> 24) & 0xFF) + "." +
                 ((ip >> 16) & 0xFF) + "." +
