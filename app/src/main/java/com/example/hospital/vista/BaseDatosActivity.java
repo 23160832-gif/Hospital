@@ -11,9 +11,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.hospital.R;
 import com.example.hospital.controlador.ConsultaController;
+import com.example.hospital.controlador.DoctorController;
 import com.example.hospital.controlador.PacienteController;
+import com.example.hospital.controlador.UsuarioController;
 import com.example.hospital.modelo.Consulta;
+import com.example.hospital.modelo.Doctor;
 import com.example.hospital.modelo.Paciente;
+import com.example.hospital.modelo.Usuario;
 
 import java.util.List;
 
@@ -23,6 +27,8 @@ public class BaseDatosActivity extends AppCompatActivity {
     private Button btnCargarTabla;
     private TextView tvDatosRaw;
     private Button btnVolver;
+    private DoctorController doctorController;
+    private UsuarioController usuarioController;
 
     private PacienteController pacienteController;
     private ConsultaController consultaController;
@@ -41,12 +47,14 @@ public class BaseDatosActivity extends AppCompatActivity {
         // Inicializar controladores
         pacienteController = new PacienteController(this);
         consultaController = new ConsultaController(this);
+        doctorController = new DoctorController(this);
+        usuarioController = new UsuarioController(this);
 
         // Poblar Spinner con opciones
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
-                new String[]{"Pacientes", "Consultas"}
+                new String[]{"Pacientes", "Consultas", "Doctores", "Usuarios"}
         );
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spTablas.setAdapter(adapter);
@@ -68,6 +76,10 @@ public class BaseDatosActivity extends AppCompatActivity {
                     mostrarPacientes();
                 } else if (tablaSeleccionada.equals("Consultas")) {
                     mostrarConsultas();
+                } else if (tablaSeleccionada.equals("Doctores")) {
+                    mostrarDoctores();
+                } else if (tablaSeleccionada.equals("Usuarios")) {
+                    mostrarUsuarios();
                 }
             }
         });
@@ -112,6 +124,47 @@ public class BaseDatosActivity extends AppCompatActivity {
                     .append(" - ").append(consulta.getHoraSalida())
                     .append("\nDiagnóstico: ").append(consulta.getDiagnostico())
                     .append("\nTratamiento: ").append(consulta.getTratamiento())
+                    .append("\n-----------------------------------\n");
+        }
+
+        tvDatosRaw.setText(sb.toString());
+    }
+
+    private void mostrarDoctores() {
+        List<Doctor> lista = doctorController.obtenerTodosLosDoctores();
+
+        if (lista == null || lista.isEmpty()) {
+            tvDatosRaw.setText("La tabla 'doctores' no contiene registros.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (Doctor doctor : lista) {
+            sb.append("ID: ").append(doctor.getIdDoctor())
+                    .append(" | Nombre: ").append(doctor.getNombre())
+                    .append(" ").append(doctor.getApellido())
+                    .append(" | Especialidad: ").append(doctor.getEspecialidad())
+                    .append("\nCédula: ").append(doctor.getCedulaProfesional())
+                    .append(" | Teléfono: ").append(doctor.getTelefono())
+                    .append("\n-----------------------------------\n");
+        }
+
+        tvDatosRaw.setText(sb.toString());
+    }
+
+    private void mostrarUsuarios() {
+        List<Usuario> lista = usuarioController.obtenerTodosLosUsuarios();
+
+        if (lista == null || lista.isEmpty()) {
+            tvDatosRaw.setText("La tabla 'usuarios' no contiene registros.");
+            return;
+        }
+
+        StringBuilder sb = new StringBuilder();
+        for (Usuario usuario : lista) {
+            sb.append("ID: ").append(usuario.getIdUsuario())
+                    .append(" | Usuario: ").append(usuario.getUsuario())
+                    .append(" | Rol: ").append(usuario.getRol())
                     .append("\n-----------------------------------\n");
         }
 
