@@ -17,7 +17,7 @@
 
         <!-- Actividad Principal (Launcher) -->
         <activity
-            android:name=".LoginActivity"
+            android:name=".vista.LoginActivity"
             android:exported="true"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
@@ -28,37 +28,37 @@
 
         <!-- Menú Principal -->
         <activity
-            android:name=".MenuActivity"
+            android:name=".vista.MenuActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <!-- WiFi Activity -->
         <activity
-            android:name=".WifiActivity"
+            android:name=".vista.WifiActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <!-- Ubicación GPS Activity -->
         <activity
-            android:name=".UbicacionActivity"
+            android:name=".vista.UbicacionActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <!-- Registro de Paciente y Consulta -->
         <activity
-            android:name=".RegistroPacienteActivity"
+            android:name=".vista.RegistroPacienteActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <!-- Lista de Pacientes -->
         <activity
-            android:name=".ListaPacientesActivity"
+            android:name=".vista.ListaPacientesActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <!-- Inspección de Base de Datos -->
         <activity
-            android:name=".BaseDatosActivity"
+            android:name=".vista.BaseDatosActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 

@@ -1,4 +1,4 @@
-package com.example.hospital;
+package com.example.hospital.vista;
 
 import android.Manifest;
 import android.content.Context;
@@ -16,6 +16,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+
+import com.example.hospital.R;
 
 public class UbicacionActivity extends AppCompatActivity {
 

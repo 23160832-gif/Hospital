@@ -1,4 +1,4 @@
-package com.example.hospital;
+package com.example.hospital.vista;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hospital.R;
+import com.example.hospital.adapter.PacienteAdapter;
 import com.example.hospital.controlador.ConsultaController;
 import com.example.hospital.controlador.PacienteController;
 import com.example.hospital.modelo.Paciente;

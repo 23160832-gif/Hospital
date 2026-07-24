@@ -1,4 +1,4 @@
-package com.example.hospital;
+package com.example.hospital.vista;
 
 import android.content.Context;
 import android.net.wifi.WifiInfo;
@@ -11,8 +11,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
+import com.example.hospital.R;
 
 public class WifiActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.hospital;
+package com.example.hospital.vista;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.hospital.R;
 import com.example.hospital.controlador.ConsultaController;
 import com.example.hospital.controlador.PacienteController;
 import com.example.hospital.modelo.Consulta;

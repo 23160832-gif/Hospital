@@ -1,4 +1,4 @@
-package com.example.hospital;
+package com.example.hospital.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.hospital.R;
 import com.example.hospital.controlador.ConsultaController;
 import com.example.hospital.modelo.Consulta;
 import com.example.hospital.modelo.Paciente;
