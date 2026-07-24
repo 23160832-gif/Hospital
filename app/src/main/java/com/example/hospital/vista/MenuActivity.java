@@ -23,7 +23,6 @@ public class MenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
 
-        // Vincular componentes
         btnWifi = findViewById(R.id.btnWifi);
         btnUbicacion = findViewById(R.id.btnUbicacion);
         btnRegistrarPaciente = findViewById(R.id.btnRegistrarPaciente);
@@ -31,7 +30,6 @@ public class MenuActivity extends AppCompatActivity {
         btnVerBaseDatos = findViewById(R.id.btnVerBaseDatos);
         btnCerrarSesion = findViewById(R.id.btnCerrarSesion);
 
-        // Configurar listeners
         btnWifi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

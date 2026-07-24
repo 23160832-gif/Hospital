@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#F4F7FB"> <!-- Fondo suave azul/grisáceo tipo app médica -->
+    android:background="#F4F7FB">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -13,20 +13,18 @@
         android:paddingHorizontal="24dp"
         android:paddingTop="40dp"
         android:paddingBottom="24dp"
-        android:clipToPadding="false"> <!-- Permite que las sombras se vean correctamente -->
+        android:clipToPadding="false">
 
-        <!-- Etiqueta superior sutil -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gestión Médica"
+            android:text="HOSPITAL"
             android:textSize="14sp"
             android:textAllCaps="true"
             android:letterSpacing="0.1"
             android:textColor="#0277BD"
             android:textStyle="bold" />
 
-        <!-- Encabezado Principal -->
         <TextView
             android:id="@+id/tvTituloMenu"
             android:layout_width="wrap_content"
@@ -38,7 +36,6 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="40dp" />
 
-        <!-- BOTÓN PRINCIPAL (Call to Action destacado) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnRegistrarPaciente"
             android:layout_width="match_parent"
@@ -57,7 +54,6 @@
             app:elevation="4dp"
             android:layout_marginBottom="24dp" />
 
-        <!-- Subtítulo de sección -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,7 +63,6 @@
             android:textColor="#486581"
             android:layout_marginBottom="16dp" />
 
-        <!-- BOTONES SECUNDARIOS (Estilo "Tarjetas Blancas" flotantes) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnListaPacientes"
             android:layout_width="match_parent"
@@ -140,13 +135,11 @@
             app:elevation="2dp"
             android:layout_marginBottom="32dp" />
 
-        <!-- Espaciador que empuja el botón de cerrar sesión hacia el fondo si la pantalla es alta -->
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- BOTÓN: Cerrar Sesión (Estilo sutil de alerta) -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnCerrarSesion"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"

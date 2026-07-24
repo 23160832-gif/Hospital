@@ -9,7 +9,6 @@
     android:paddingTop="40dp"
     android:paddingBottom="24dp">
 
-    <!-- Etiqueta superior -->
     <TextView
         android:id="@+id/tvEtiquetaLista"
         android:layout_width="wrap_content"
@@ -23,7 +22,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <!-- Encabezado -->
     <TextView
         android:id="@+id/tvTituloLista"
         android:layout_width="0dp"
@@ -37,7 +35,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Campo de búsqueda -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/tilBuscar"
         android:layout_width="0dp"
@@ -72,7 +69,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Vista vacía (Cuando no hay datos) -->
     <TextView
         android:id="@+id/tvSinPacientes"
         android:layout_width="wrap_content"
@@ -87,7 +83,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón Eliminar (Acción Destructiva) -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnEliminarPaciente"
         android:layout_width="0dp"
@@ -106,7 +101,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- Botón Volver -->
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnVolver"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"

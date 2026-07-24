@@ -50,7 +50,6 @@ public class BaseDatosActivity extends AppCompatActivity {
         doctorController = new DoctorController(this);
         usuarioController = new UsuarioController(this);
 
-        // Poblar Spinner con opciones
         ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
@@ -59,7 +58,6 @@ public class BaseDatosActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spTablas.setAdapter(adapter);
 
-        // Listener para volver
         btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

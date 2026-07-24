@@ -25,28 +25,23 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        // Inicializar controlador
         usuarioController = new UsuarioController(this);
 
-        // Vincular componentes
         etUsuario = findViewById(R.id.etUsuario);
         etPassword = findViewById(R.id.etPassword);
         btnLogin = findViewById(R.id.btnLogin);
 
-        // Configurar evento de clic
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String usuario = etUsuario.getText().toString().trim();
                 String password = etPassword.getText().toString().trim();
 
-                // Validar campos vacíos
                 if (usuario.isEmpty() || password.isEmpty()) {
                     Toast.makeText(LoginActivity.this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                // Autenticar usuario
                 Usuario usuarioAutenticado = usuarioController.validarUsuario(usuario, password);
 
                 if (usuarioAutenticado != null) {

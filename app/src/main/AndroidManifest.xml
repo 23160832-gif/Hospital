@@ -2,11 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hospital">
 
-    <!-- Permisos de ubicación -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-
-    <!-- Permisos de red y WiFi -->
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
@@ -19,7 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MaterialComponents.Light.NoActionBar">
 
-        <!-- Actividad Principal (Launcher) -->
         <activity
             android:name=".vista.LoginActivity"
             android:exported="true"
@@ -30,37 +26,31 @@
             </intent-filter>
         </activity>
 
-        <!-- Menú Principal -->
         <activity
             android:name=".vista.MenuActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
-        <!-- WiFi Activity -->
         <activity
             android:name=".vista.WifiActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
-        <!-- Ubicación GPS Activity -->
         <activity
             android:name=".vista.UbicacionActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
-        <!-- Registro de Paciente y Consulta -->
         <activity
             android:name=".vista.RegistroPacienteActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
-        <!-- Lista de Pacientes -->
         <activity
             android:name=".vista.ListaPacientesActivity"
             android:exported="false"
             android:theme="@style/Theme.MaterialComponents.Light.NoActionBar" />
 
-        <!-- Inspección de Base de Datos -->
         <activity
             android:name=".vista.BaseDatosActivity"
             android:exported="false"

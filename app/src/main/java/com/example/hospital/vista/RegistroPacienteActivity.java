@@ -46,12 +46,10 @@ public class RegistroPacienteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_paciente);
 
-        // Inicializar controladores
         pacienteController = new PacienteController(this);
         consultaController = new ConsultaController(this);
         doctorController = new DoctorController(this);
 
-        // Vincular componentes
         etNombre = findViewById(R.id.etNombre);
         etApellido = findViewById(R.id.etApellido);
         etEdad = findViewById(R.id.etEdad);
@@ -65,7 +63,6 @@ public class RegistroPacienteActivity extends AppCompatActivity {
         btnGuardar = findViewById(R.id.btnGuardar);
         btnVolver = findViewById(R.id.btnVolver);
 
-        // Poblar Spinner de sexo
         ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_spinner_item,
@@ -74,10 +71,8 @@ public class RegistroPacienteActivity extends AppCompatActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spSexo.setAdapter(adapter);
 
-        // Establecer fecha y hora actual automáticamente
         establecerFechaYHoraActual();
 
-        // Listener para volver
         btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,7 +80,6 @@ public class RegistroPacienteActivity extends AppCompatActivity {
             }
         });
 
-        // Listener para guardar
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -95,15 +89,12 @@ public class RegistroPacienteActivity extends AppCompatActivity {
     }
 
     private void establecerFechaYHoraActual() {
-        // Obtener fecha actual
         SimpleDateFormat sdfFecha = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
         String fechaActual = sdfFecha.format(new Date());
 
-        // Obtener hora actual
         SimpleDateFormat sdfHora = new SimpleDateFormat("HH:mm", Locale.getDefault());
         String horaActual = sdfHora.format(new Date());
 
-        // Asignar a los campos (como texto fijo o deshabilitados para edición)
         etFechaConsulta.setText(fechaActual);
         etFechaConsulta.setFocusable(false);
         etFechaConsulta.setClickable(false);
@@ -122,7 +113,6 @@ public class RegistroPacienteActivity extends AppCompatActivity {
     }
 
     private void guardarRegistro() {
-        // Obtener y limpiar datos
         String nombre = etNombre.getText().toString().trim();
         String apellido = etApellido.getText().toString().trim();
         String edadStr = etEdad.getText().toString().trim();
@@ -131,14 +121,12 @@ public class RegistroPacienteActivity extends AppCompatActivity {
         String diagnostico = etDiagnostico.getText().toString().trim();
         String tratamiento = etTratamiento.getText().toString().trim();
 
-        // Validar campos obligatorios
         if (nombre.isEmpty() || apellido.isEmpty() || edadStr.isEmpty() ||
                 idDoctorStr.isEmpty() || diagnostico.isEmpty() || tratamiento.isEmpty()) {
             Toast.makeText(this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Validar que nombre y apellido solo contengan letras
         if (!soloLetras(nombre)) {
             Toast.makeText(this, "El nombre solo debe contener letras", Toast.LENGTH_SHORT).show();
             return;
@@ -148,7 +136,6 @@ public class RegistroPacienteActivity extends AppCompatActivity {
             return;
         }
 
-        // Validar que edad sea número
         int edad;
         try {
             edad = Integer.parseInt(edadStr);
@@ -157,7 +144,6 @@ public class RegistroPacienteActivity extends AppCompatActivity {
             return;
         }
 
-        // Validar que el ID del doctor exista
         int idDoctor;
         try {
             idDoctor = Integer.parseInt(idDoctorStr);
@@ -172,12 +158,10 @@ public class RegistroPacienteActivity extends AppCompatActivity {
             return;
         }
 
-        // Obtener fecha y hora actual (ya están en los campos)
         String fechaConsulta = etFechaConsulta.getText().toString().trim();
         String horaEntrada = etHoraEntrada.getText().toString().trim();
         String horaSalida = etHoraSalida.getText().toString().trim();
 
-        // 1. Insertar paciente
         Paciente paciente = new Paciente(0, nombre, apellido, edad, sexo);
         long idPacienteGenerado = pacienteController.insertarPaciente(paciente);
 
@@ -186,7 +170,6 @@ public class RegistroPacienteActivity extends AppCompatActivity {
             return;
         }
 
-        // 2. Insertar consulta vinculada al paciente
         Consulta consulta = new Consulta(
                 0,
                 (int) idPacienteGenerado,

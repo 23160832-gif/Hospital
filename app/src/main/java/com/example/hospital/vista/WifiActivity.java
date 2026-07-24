@@ -38,7 +38,6 @@ public class WifiActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_wifi);
 
-        // Vincular componentes
         tvSsid = findViewById(R.id.tvSsid);
         tvBssid = findViewById(R.id.tvBssid);
         tvIp = findViewById(R.id.tvIp);
@@ -49,10 +48,8 @@ public class WifiActivity extends AppCompatActivity {
         btnActualizar = findViewById(R.id.btnActualizar);
         btnVolver = findViewById(R.id.btnVolver);
 
-        // Verificar permisos y cargar información
         verificarPermisosWifi();
 
-        // Listener para actualizar
         btnActualizar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,7 +58,6 @@ public class WifiActivity extends AppCompatActivity {
             }
         });
 
-        // Listener para volver
         btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,7 +128,6 @@ public class WifiActivity extends AppCompatActivity {
             return;
         }
 
-        // SSID - Manejar correctamente
         String ssid = wifiInfo.getSSID();
         if (ssid != null && !ssid.isEmpty() && !ssid.equals("<unknown ssid>")) {
             // Remove quotes if present (Android sometimes adds "")
@@ -159,7 +154,6 @@ public class WifiActivity extends AppCompatActivity {
             }
         }
 
-        // BSSID
         String bssid = wifiInfo.getBSSID();
         if (bssid != null && !bssid.isEmpty()) {
             tvBssid.setText("BSSID: " + bssid);
@@ -167,7 +161,6 @@ public class WifiActivity extends AppCompatActivity {
             tvBssid.setText("BSSID: --");
         }
 
-        // Dirección IP
         int ipInt = wifiInfo.getIpAddress();
         if (ipInt != 0) {
             String ip = intToIp(ipInt);
@@ -176,7 +169,6 @@ public class WifiActivity extends AppCompatActivity {
             tvIp.setText("IP: --");
         }
 
-        // Frecuencia
         int frequency = wifiInfo.getFrequency();
         if (frequency > 0) {
             tvFrecuencia.setText("Frecuencia: " + frequency + " MHz");
@@ -184,7 +176,6 @@ public class WifiActivity extends AppCompatActivity {
             tvFrecuencia.setText("Frecuencia: --");
         }
 
-        // Velocidad de enlace
         int linkSpeed = wifiInfo.getLinkSpeed();
         if (linkSpeed > 0) {
             tvVelocidad.setText("Velocidad: " + linkSpeed + " Mbps");
@@ -192,7 +183,6 @@ public class WifiActivity extends AppCompatActivity {
             tvVelocidad.setText("Velocidad: --");
         }
 
-        // Intensidad de señal (RSSI)
         int rssi = wifiInfo.getRssi();
         if (rssi != Integer.MAX_VALUE) {
             tvIntensidad.setText("Intensidad: " + rssi + " dBm");
@@ -200,7 +190,6 @@ public class WifiActivity extends AppCompatActivity {
             tvIntensidad.setText("Intensidad: --");
         }
 
-        // Estado de conexión
         tvEstado.setText("Estado: Conectado");
     }
 

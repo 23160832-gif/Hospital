@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#F4F7FB"> <!-- Mismo fondo de la aplicación -->
+    android:background="#F4F7FB">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +15,7 @@
         android:paddingBottom="24dp"
         android:clipToPadding="false">
 
-        <!-- Etiqueta superior -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,7 +26,7 @@
             android:textColor="#0277BD"
             android:textStyle="bold" />
 
-        <!-- Encabezado alineado a la izquierda -->
+
         <TextView
             android:id="@+id/tvTituloWifi"
             android:layout_width="wrap_content"
@@ -38,7 +38,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginBottom="32dp" />
 
-        <!-- Tarjeta de información blanca -->
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,7 +54,7 @@
                 android:orientation="vertical"
                 android:padding="24dp">
 
-                <!-- SSID (Resaltado como el dato principal) -->
+
                 <TextView
                     android:id="@+id/tvSsid"
                     android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                     android:textStyle="bold"
                     android:textColor="#102A43" />
 
-                <!-- Línea divisoria sutil -->
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -72,7 +72,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"/>
 
-                <!-- BSSID -->
+
                 <TextView
                     android:id="@+id/tvBssid"
                     android:layout_width="match_parent"
@@ -88,7 +88,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"/>
 
-                <!-- Dirección IP -->
+
                 <TextView
                     android:id="@+id/tvIp"
                     android:layout_width="match_parent"
@@ -104,7 +104,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"/>
 
-                <!-- Frecuencia -->
+
                 <TextView
                     android:id="@+id/tvFrecuencia"
                     android:layout_width="match_parent"
@@ -120,7 +120,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"/>
 
-                <!-- Velocidad de Enlace -->
+
                 <TextView
                     android:id="@+id/tvVelocidad"
                     android:layout_width="match_parent"
@@ -136,7 +136,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"/>
 
-                <!-- Intensidad de Señal/RSSI -->
+
                 <TextView
                     android:id="@+id/tvIntensidad"
                     android:layout_width="match_parent"
@@ -152,7 +152,7 @@
                     android:layout_marginTop="12dp"
                     android:layout_marginBottom="12dp"/>
 
-                <!-- Estado de Conexión (Resaltado en azul) -->
+
                 <TextView
                     android:id="@+id/tvEstado"
                     android:layout_width="match_parent"
@@ -165,13 +165,13 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Espaciador para empujar los botones hacia el fondo -->
+
         <Space
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1" />
 
-        <!-- Botón Actualizar (Principal) -->
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnActualizar"
             android:layout_width="match_parent"
@@ -187,7 +187,7 @@
             app:elevation="4dp"
             android:layout_marginBottom="16dp" />
 
-        <!-- Botón Volver (Secundario) -->
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnVolver"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"

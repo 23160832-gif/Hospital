@@ -21,8 +21,8 @@ import java.util.List;
 public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.PacienteViewHolder> {
 
     private Context context;
-    private List<Paciente> listaPacientes; // Lista original completa
-    private List<Paciente> listaFiltrada;  // Lista filtrada para mostrar
+    private List<Paciente> listaPacientes;
+    private List<Paciente> listaFiltrada;
     private ConsultaController consultaController;
     private OnPacienteSelectedListener listener;
     private int selectedPosition = -1;
@@ -36,7 +36,7 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
                            OnPacienteSelectedListener listener) {
         this.context = context;
         this.listaPacientes = listaPacientes;
-        this.listaFiltrada = new ArrayList<>(listaPacientes); // Copia para filtrar
+        this.listaFiltrada = new ArrayList<>(listaPacientes);
         this.consultaController = consultaController;
         this.listener = listener;
     }
@@ -52,12 +52,10 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
     public void onBindViewHolder(@NonNull PacienteViewHolder holder, int position) {
         Paciente paciente = listaFiltrada.get(position);
 
-        // Datos básicos del paciente
         holder.tvIdPaciente.setText("ID: #" + paciente.getIdPaciente());
         holder.tvNombreCompleto.setText(paciente.getNombre() + " " + paciente.getApellido());
         holder.tvEdadSexo.setText(paciente.getEdad() + " años | " + paciente.getSexo());
 
-        // Obtener consulta asociada al paciente
         Consulta consulta = obtenerConsultaPorPaciente(paciente.getIdPaciente());
 
         if (consulta != null) {
@@ -68,14 +66,12 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
             holder.tvDiagnostico.setText("Diagnóstico: Sin registro");
         }
 
-        // Marcar visualmente el elemento seleccionado
         if (selectedPosition == position) {
             holder.itemView.setBackgroundColor(context.getResources().getColor(android.R.color.holo_blue_light));
         } else {
             holder.itemView.setBackgroundColor(context.getResources().getColor(android.R.color.transparent));
         }
 
-        // Click largo para seleccionar
         holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -91,7 +87,6 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
             }
         });
 
-        // Click corto para limpiar selección
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -121,9 +116,7 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
         return null;
     }
 
-    /**
-     * Actualiza la lista completa y el filtro
-     */
+
     public void setPacientes(List<Paciente> nuevosPacientes) {
         this.listaPacientes = nuevosPacientes;
         this.listaFiltrada = new ArrayList<>(nuevosPacientes);
@@ -131,9 +124,7 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
         notifyDataSetChanged();
     }
 
-    /**
-     * Filtra la lista de pacientes por texto (nombre o apellido)
-     */
+
     public void filtrar(String texto) {
         if (texto == null || texto.trim().isEmpty()) {
             // Mostrar todos
@@ -153,13 +144,11 @@ public class PacienteAdapter extends RecyclerView.Adapter<PacienteAdapter.Pacien
         selectedPosition = -1; // Limpiar selección al filtrar
         notifyDataSetChanged();
 
-        // Notificar al listener que se deseleccionó
         if (listener != null) {
             listener.onPacienteSelected(-1);
         }
     }
 
-    // ViewHolder interno
     public static class PacienteViewHolder extends RecyclerView.ViewHolder {
         private TextView tvIdPaciente;
         private TextView tvNombreCompleto;

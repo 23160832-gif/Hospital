@@ -9,7 +9,6 @@ public class ConexionSQLite extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "hospital.db";
     private static final int DATABASE_VERSION = 1;
 
-    // Sentencias CREATE TABLE
     private static final String CREATE_TABLE_USUARIO =
             "CREATE TABLE USUARIO (" +
                     "idUsuario INTEGER PRIMARY KEY AUTOINCREMENT, " +
@@ -51,19 +50,16 @@ public class ConexionSQLite extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        // Crear tablas
         db.execSQL(CREATE_TABLE_USUARIO);
         db.execSQL(CREATE_TABLE_DOCTOR);
         db.execSQL(CREATE_TABLE_PACIENTE);
         db.execSQL(CREATE_TABLE_CONSULTA);
 
-        // Insertar datos de prueba en USUARIO
         db.execSQL("INSERT INTO USUARIO (usuario, password, rol) VALUES ('admin', 'admin123', 'Administrador')");
         db.execSQL("INSERT INTO USUARIO (usuario, password, rol) VALUES ('doctor1', 'doc123', 'Médico')");
         db.execSQL("INSERT INTO USUARIO (usuario, password, rol) VALUES ('doctor2', 'doc456', 'Médico')");
         db.execSQL("INSERT INTO USUARIO (usuario, password, rol) VALUES ('recepcion', 'rec123', 'Recepción')");
 
-        // Insertar datos de prueba en DOCTOR
         db.execSQL("INSERT INTO DOCTOR (nombre, apellido, especialidad, cedulaProfesional, telefono) VALUES " +
                 "('Juan', 'Pérez', 'Cardiología', '12345678', '555-1001')");
         db.execSQL("INSERT INTO DOCTOR (nombre, apellido, especialidad, cedulaProfesional, telefono) VALUES " +
@@ -73,7 +69,6 @@ public class ConexionSQLite extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO DOCTOR (nombre, apellido, especialidad, cedulaProfesional, telefono) VALUES " +
                 "('Ana', 'Martínez', 'Ginecología', '44332211', '555-1004')");
 
-        // Insertar datos de prueba en PACIENTE
         db.execSQL("INSERT INTO PACIENTE (nombre, apellido, edad, sexo) VALUES " +
                 "('Luis', 'Fernández', 45, 'Masculino')");
         db.execSQL("INSERT INTO PACIENTE (nombre, apellido, edad, sexo) VALUES " +
@@ -83,7 +78,6 @@ public class ConexionSQLite extends SQLiteOpenHelper {
         db.execSQL("INSERT INTO PACIENTE (nombre, apellido, edad, sexo) VALUES " +
                 "('Sofía', 'López', 55, 'Femenino')");
 
-        // Insertar datos de prueba en CONSULTA
         db.execSQL("INSERT INTO CONSULTA (idPaciente, idDoctor, fechaConsulta, diagnostico, tratamiento, horaEntrada, horaSalida) VALUES " +
                 "(1, 1, '2026-07-20', 'Hipertensión', 'Medicación y dieta baja en sal', '08:00', '08:30')");
         db.execSQL("INSERT INTO CONSULTA (idPaciente, idDoctor, fechaConsulta, diagnostico, tratamiento, horaEntrada, horaSalida) VALUES " +

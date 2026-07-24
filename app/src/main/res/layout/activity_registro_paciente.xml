@@ -15,7 +15,6 @@
         android:paddingBottom="24dp"
         android:clipToPadding="false">
 
-        <!-- Etiqueta superior -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -26,18 +25,16 @@
             android:textColor="#0277BD"
             android:textStyle="bold" />
 
-        <!-- Título principal -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Registro Médico"
+            android:text="RHOSPITAL"
             android:textSize="32sp"
             android:textStyle="bold"
             android:textColor="#102A43"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="24dp" />
 
-        <!-- TARJETA 1: DATOS DEL PACIENTE -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -62,7 +59,6 @@
                     android:textColor="#102A43"
                     android:layout_marginBottom="16dp" />
 
-                <!-- Nombre -->
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -84,7 +80,7 @@
                         android:maxLines="1" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Apellido -->
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -112,7 +108,7 @@
                     android:orientation="horizontal"
                     android:baselineAligned="false">
 
-                    <!-- Edad -->
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
@@ -135,7 +131,7 @@
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Sexo (Spinner) -->
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
@@ -162,7 +158,7 @@
         </com.google.android.material.card.MaterialCardView>
 
 
-        <!-- TARJETA 2: DATOS DE LA CONSULTA -->
+
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -194,7 +190,7 @@
                     android:baselineAligned="false"
                     android:layout_marginBottom="12dp">
 
-                    <!-- ID del Doctor -->
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
@@ -217,7 +213,7 @@
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Fecha Consulta -->
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
@@ -248,7 +244,7 @@
                     android:baselineAligned="false"
                     android:layout_marginBottom="12dp">
 
-                    <!-- Hora Entrada -->
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
@@ -271,7 +267,7 @@
                             android:maxLines="1" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- Hora Salida -->
+
                     <com.google.android.material.textfield.TextInputLayout
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                         android:layout_width="0dp"
@@ -295,7 +291,7 @@
                     </com.google.android.material.textfield.TextInputLayout>
                 </LinearLayout>
 
-                <!-- Diagnóstico -->
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -318,7 +314,7 @@
                         android:minLines="3" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Tratamiento -->
+
                 <com.google.android.material.textfield.TextInputLayout
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -343,7 +339,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Botón Guardar (Principal) -->
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnGuardar"
             android:layout_width="match_parent"
@@ -359,7 +355,7 @@
             app:elevation="4dp"
             android:layout_marginBottom="16dp" />
 
-        <!-- Botón Volver (Secundario) -->
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnVolver"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"

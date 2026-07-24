@@ -39,7 +39,6 @@ public class UbicacionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ubicacion);
 
-        // Vincular componentes
         tvLatitud = findViewById(R.id.tvLatitud);
         tvLongitud = findViewById(R.id.tvLongitud);
         tvAltitud = findViewById(R.id.tvAltitud);
@@ -48,10 +47,8 @@ public class UbicacionActivity extends AppCompatActivity {
         btnObtenerUbicacion = findViewById(R.id.btnObtenerUbicacion);
         btnVolver = findViewById(R.id.btnVolver);
 
-        // Inicializar LocationManager
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        // Configurar listeners
         btnObtenerUbicacion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,7 +63,6 @@ public class UbicacionActivity extends AppCompatActivity {
             }
         });
 
-        // Primera lectura al iniciar
         verificarPermisosYObtenerUbicacion();
     }
 
@@ -104,7 +100,6 @@ public class UbicacionActivity extends AppCompatActivity {
             return;
         }
 
-        // Verificar si al menos un proveedor está habilitado
         boolean gpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         boolean networkEnabled = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
 
@@ -118,7 +113,6 @@ public class UbicacionActivity extends AppCompatActivity {
             return;
         }
 
-        // Intentar obtener última ubicación conocida
         Location lastLocation = null;
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 == PackageManager.PERMISSION_GRANTED) {
@@ -209,12 +203,10 @@ public class UbicacionActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        // Liberar recursos
         if (locationManager != null && locationListener != null) {
             try {
                 locationManager.removeUpdates(locationListener);
             } catch (SecurityException e) {
-                // Ignorar
             }
         }
     }

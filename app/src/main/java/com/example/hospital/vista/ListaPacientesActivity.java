@@ -48,14 +48,11 @@ public class ListaPacientesActivity extends AppCompatActivity
         btnVolver = findViewById(R.id.btnVolver);
         btnEliminarPaciente = findViewById(R.id.btnEliminarPaciente);
 
-        // Inicializar controladores
         pacienteController = new PacienteController(this);
         consultaController = new ConsultaController(this);
 
-        // Configurar RecyclerView
         rvPacientes.setLayoutManager(new LinearLayoutManager(this));
 
-        // Configurar listener para volver
         btnVolver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -63,7 +60,6 @@ public class ListaPacientesActivity extends AppCompatActivity
             }
         });
 
-        // Configurar listener para eliminar
         btnEliminarPaciente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -71,25 +67,20 @@ public class ListaPacientesActivity extends AppCompatActivity
             }
         });
 
-        // Configurar buscador con TextWatcher
         etBuscar.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-                // No se usa
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                // No se usa
             }
 
             @Override
             public void afterTextChanged(Editable s) {
-                // Filtrar la lista cuando el texto cambia
                 if (adapter != null) {
                     adapter.filtrar(s.toString());
 
-                    // Mostrar/ocultar vista vacía según resultados del filtro
                     if (adapter.getItemCount() == 0) {
                         tvSinPacientes.setVisibility(View.VISIBLE);
                         tvSinPacientes.setText("No se encontraron pacientes");
@@ -102,7 +93,6 @@ public class ListaPacientesActivity extends AppCompatActivity
             }
         });
 
-        // Cargar lista inicial
         cargarListaPacientes();
     }
 
@@ -110,7 +100,6 @@ public class ListaPacientesActivity extends AppCompatActivity
     protected void onResume() {
         super.onResume();
         cargarListaPacientes();
-        // Limpiar búsqueda al regresar
         etBuscar.setText("");
     }
 
