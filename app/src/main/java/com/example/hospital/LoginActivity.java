@@ -1,24 +1,62 @@
 package com.example.hospital;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
+
+import com.example.hospital.controlador.UsuarioController;
+import com.example.hospital.modelo.Usuario;
+import com.google.android.material.textfield.TextInputEditText;
 
 public class LoginActivity extends AppCompatActivity {
+
+    private TextInputEditText etUsuario;
+    private TextInputEditText etPassword;
+    private Button btnLogin;
+    private UsuarioController usuarioController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
         setContentView(R.layout.activity_login);
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+
+        // Inicializar controlador
+        usuarioController = new UsuarioController(this);
+
+        // Vincular componentes
+        etUsuario = findViewById(R.id.etUsuario);
+        etPassword = findViewById(R.id.etPassword);
+        btnLogin = findViewById(R.id.btnLogin);
+
+        // Configurar evento de clic
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String usuario = etUsuario.getText().toString().trim();
+                String password = etPassword.getText().toString().trim();
+
+                // Validar campos vacíos
+                if (usuario.isEmpty() || password.isEmpty()) {
+                    Toast.makeText(LoginActivity.this, "Por favor complete todos los campos", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                // Autenticar usuario
+                Usuario usuarioAutenticado = usuarioController.validarUsuario(usuario, password);
+
+                if (usuarioAutenticado != null) {
+                    Toast.makeText(LoginActivity.this, "Bienvenido/a " + usuarioAutenticado.getUsuario(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                    Toast.makeText(LoginActivity.this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
+                }
+            }
         });
     }
 }
