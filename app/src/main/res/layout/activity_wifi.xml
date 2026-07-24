@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        android:gravity="center_horizontal">
+
+        <!-- Encabezado -->
+        <TextView
+            android:id="@+id/tvTituloWifi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monitoreo de Red WiFi"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="32dp" />
+
+        <!-- Tarjeta de información -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="4dp"
+            android:layout_marginBottom="24dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <!-- SSID -->
+                <TextView
+                    android:id="@+id/tvSsid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SSID: --"
+                    android:textSize="16sp"
+                    android:paddingBottom="12dp"
+                    android:textColor="@android:color/black" />
+
+                <!-- BSSID -->
+                <TextView
+                    android:id="@+id/tvBssid"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="BSSID: --"
+                    android:textSize="16sp"
+                    android:paddingBottom="12dp"
+                    android:textColor="@android:color/black" />
+
+                <!-- Dirección IP -->
+                <TextView
+                    android:id="@+id/tvIp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="IP: --"
+                    android:textSize="16sp"
+                    android:paddingBottom="12dp"
+                    android:textColor="@android:color/black" />
+
+                <!-- Frecuencia -->
+                <TextView
+                    android:id="@+id/tvFrecuencia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Frecuencia: --"
+                    android:textSize="16sp"
+                    android:paddingBottom="12dp"
+                    android:textColor="@android:color/black" />
+
+                <!-- Velocidad de Enlace -->
+                <TextView
+                    android:id="@+id/tvVelocidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Velocidad: --"
+                    android:textSize="16sp"
+                    android:paddingBottom="12dp"
+                    android:textColor="@android:color/black" />
+
+                <!-- Intensidad de Señal/RSSI -->
+                <TextView
+                    android:id="@+id/tvIntensidad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Intensidad: --"
+                    android:textSize="16sp"
+                    android:paddingBottom="12dp"
+                    android:textColor="@android:color/black" />
+
+                <!-- Estado de Conexión -->
+                <TextView
+                    android:id="@+id/tvEstado"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Estado: --"
+                    android:textSize="16sp"
+                    android:textColor="@android:color/black" />
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Botón Actualizar -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnActualizar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Actualizar Información"
+            android:textAllCaps="false"
+            android:padding="14dp"
+            app:cornerRadius="8dp"
+            android:layout_marginBottom="16dp" />
+
+        <!-- Botón Volver -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnVolver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Volver al Menú"
+            android:textAllCaps="false"
+            android:padding="14dp"
+            app:cornerRadius="8dp"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginBottom="16dp" />
+
+    </LinearLayout>
+</ScrollView>
